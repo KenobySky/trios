@@ -1,0 +1,16 @@
+IMGSET  ########################################################
+.n 2
+.f 3
+.d
+./
+./
+./
+
+input.png
+output.png
+
+
+input2.png
+output2.png
+mask.png
+

@@ -6,6 +6,8 @@ Created on Fri Dec 11 10:11:40 2015
 """
 from __future__ import print_function
 
+import cv2
+
 import trios
 import numpy as np
 import scipy as sp
@@ -64,10 +66,10 @@ def compare_folders(testset, res_folder, window=None, binary=False, per_image=Fa
     for count, (i, o, m) in enumerate(testset):
         if trios.show_eval_progress:
             print('Comparing', o, file=sys.stderr)
-        out = sp.ndimage.imread(o, mode='L')
+        out = cv2.imread(o, cv2.IMREAD_GRAYSCALE)
         o_name = os.path.split(o)[1]
-        msk = sp.ndimage.imread(m, mode='L')
-        res = sp.ndimage.imread('%s/%s'%(res_folder, o_name), mode='L')
+        msk = cv2.imread(m, cv2.IMREAD_GRAYSCALE)
+        res = cv2.imread('%s/%s'%(res_folder, o_name), cv2.IMREAD_GRAYSCALE)
         
         if binary:
             perf_i = compare_images_binary(out, msk, res, ww, hh)

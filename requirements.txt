@@ -1,8 +1,7 @@
-cython==0.26.1
-cffi==1.10.0
-numpy==1.13.3
-scikit-learn==0.19.1
-scipy==0.19.1 
-pillow
-numba==0.35.0
-scikit-image==0.13.1
+numpy~=1.20.3
+scikit-learn~=1.0.2
+cffi~=1.15.0
+scikit-image~=0.19.2
+numba~=0.54.1
+scipy~=1.7.3
+setuptools~=58.0.4

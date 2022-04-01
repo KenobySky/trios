@@ -7,8 +7,9 @@ Created on Wed Mar 25 14:40:19 2015
 from __future__ import print_function
 from __future__ import division
 
+import cv2
 
-from trios.wop_matrix_ops import process_image, apply_loop, compare_images, compare_images_binary, process_image_ordered, process_one_image, count_pixels_mask
+from trios.wop_matrix_ops import apply_loop, compare_images, compare_images_binary
 
 from trios.serializable import Serializable
 
@@ -22,32 +23,32 @@ import scipy.ndimage
 import inspect
 import sys
 
-import math
 
 import multiprocessing
-from functools import partial
+
 import itertools
 
 import logging
+
 logger = logging.getLogger('trios.woperator')
 
 
 def worker_eval(t):
     self, window, imgset, nprocs, procnumber, bin = t
     if not window is None:
-        x_border = window.shape[1]//2
-        y_border = window.shape[0]//2
+        x_border = window.shape[1] // 2
+        y_border = window.shape[0] // 2
     else:
         x_border = y_border = 0
-    idx = [ i  for i in range(len(imgset)) if i % nprocs == procnumber]
+    idx = [i for i in range(len(imgset)) if i % nprocs == procnumber]
     errs = {}
     for i in idx:
         inp, out, msk = imgset[i]
         if trios.show_eval_progress:
             print('Testing', i, inp, out, file=sys.stderr)
 
-        inp = sp.ndimage.imread(inp, mode='L')
-        out = sp.ndimage.imread(out, mode='L')
+        inp = cv2.imread(inp, cv2.IMREAD_GRAYSCALE)
+        out = cv2.imread(out, cv2.IMREAD_GRAYSCALE)
         msk = p.load_mask_image(msk, inp.shape, self.window)
         res = self.apply(inp, msk)
         if bin:
@@ -67,7 +68,7 @@ class WOperator(Serializable):
     (i) its neighborhood (Window) of the operator;
     (ii) the classifier used (defined in the Classifier class).
     '''
-    
+
     bibtex_citation = '''@inproceedings{montagner2016image,
   title={Image operator learning and applications},
   author={Montagner, Igor S and Hirata, Nina ST and Hirata, Roberto},
@@ -77,11 +78,10 @@ class WOperator(Serializable):
   organization={IEEE}
 }'''
 
-    
     def cite_me(self):
         return '\n'.join([self.bibtex_citation, self.extractor.bibtex_citation,
-                         self.classifier.bibtex_citation])
-    
+                          self.classifier.bibtex_citation])
+
     def __init__(self, window=None, cls=None, fext=None, batch=True):
         self.window = window
         if inspect.isclass(cls):
@@ -99,9 +99,9 @@ class WOperator(Serializable):
 
     def train(self, imgset, kw={}):
         if self.classifier.partial:
-            for i in range(1): #niters
+            for i in range(1):  # niters
                 X, y = self.extractor.extract_dataset_batch(imgset)
-                self.classifier.partial_train(X , y, kw)
+                self.classifier.partial_train(X, y, kw)
         else:
             dataset = self.extractor.extract_dataset(imgset, self.classifier.ordered)
             self.classifier.train(dataset, kw)
@@ -112,8 +112,8 @@ class WOperator(Serializable):
             if mask is None:
                 mask = np.ones_like(image)
             res = np.zeros(image.shape, np.uint8)
-            ww2 = max(self.window.shape[1]//2, 1)
-            hh2 = max(self.window.shape[0]//2, 1)
+            ww2 = max(self.window.shape[1] // 2, 1)
+            hh2 = max(self.window.shape[0] // 2, 1)
             idx_i, idx_j = np.nonzero(mask[hh2:-hh2, ww2:-ww2])
 
             image_no_border = image[hh2:-hh2, ww2:-ww2]
@@ -129,19 +129,21 @@ class WOperator(Serializable):
 
                     self.extractor.extract_batch(image_no_border, batch_i, batch_j, batch[:num])
                     batch_pred = self.classifier.apply_batch(batch[:num])
-                    res[batch_i+hh2,batch_j+ww2] = batch_pred
-            else: 
+                    res[batch_i + hh2, batch_j + ww2] = batch_pred
+            else:
                 features = np.zeros((len(idx_i), len(self.extractor)), self.extractor.dtype)
                 self.extractor.extract_batch(image_no_border, idx_i, idx_j, features)
                 pred = self.classifier.apply_batch(features)
-                res[idx_i+hh2,idx_j+ww2] = pred
+                res[idx_i + hh2, idx_j + ww2] = pred
             return res
         else:
             return apply_loop(self.window, image, mask, self.classifier, self.extractor)
 
     def eval(self, imgset, window=None, per_image=False, binary=False, procs=2):
         errors = [0] * len(imgset)
-        ll = list(zip(itertools.repeat(self), itertools.repeat(window), itertools.repeat(imgset), itertools.repeat(procs), range(procs), itertools.repeat(binary)))
+        ll = list(
+            zip(itertools.repeat(self), itertools.repeat(window), itertools.repeat(imgset), itertools.repeat(procs),
+                range(procs), itertools.repeat(binary)))
         if trios.mp_support and procs > 1:
             ctx = multiprocessing.get_context('forkserver')
             errors_p = ctx.Pool(processes=procs)
@@ -151,10 +153,10 @@ class WOperator(Serializable):
             del errors_p
         else:
             errors_dict = [worker_eval((self, window, imgset, 1, 0, binary))]
-        
+
         for worker_errors in errors_dict:
             for k in worker_errors.keys():
-                errors[k] = worker_errors[k] 
+                errors[k] = worker_errors[k]
 
         if binary:
             TP = sum([err[0] for err in errors])
@@ -166,9 +168,8 @@ class WOperator(Serializable):
             total_pixels = sum([err[1] for err in errors])
             total_errors = sum([err[0] for err in errors])
             if per_image:
-                return float(total_errors)/total_pixels, errors
-            return float(total_errors)/total_pixels
-
+                return float(total_errors) / total_pixels, errors
+            return float(total_errors) / total_pixels
 
     def write_state(self, obj_dict):
         obj_dict['classifier'] = self.classifier.write(None)
@@ -195,6 +196,3 @@ class WOperator(Serializable):
 
         if len(self.window.shape) == 1:
             self.window = self.window.reshape((self.window.shape[0], 1))
-
-
-

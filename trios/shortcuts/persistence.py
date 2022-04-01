@@ -2,8 +2,8 @@
 
 import pickle
 import gzip
-import scipy as sp
-import scipy.ndimage
+
+import cv2
 import numpy as np
 
 
@@ -18,7 +18,7 @@ def load_gzip(fname):
 
 
 def load_image(fname):
-    return sp.ndimage.imread(fname, mode='L')
+    return cv2.imread(fname, cv2.IMREAD_GRAYSCALE)
 
 def load_mask_image(fname, shape, win):
     if fname is not None and fname != '':
@@ -33,7 +33,7 @@ def load_mask_image(fname, shape, win):
 
 
 def save_image(image, fname):
-    sp.misc.imsave(fname, image)
+    cv2.imwrite(fname, image)
 
 
 def load_imageset(imgset, win):

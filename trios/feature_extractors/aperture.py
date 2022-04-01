@@ -1,0 +1,58 @@
+from trios.feature_extractors.raw import RAWFeatureExtractor
+
+import numpy as np
+
+
+class Aperture(RAWFeatureExtractor):
+    '''
+    This feature extractor is based on the work on Aperture operators (or WK-operators, cite).
+    It is used to introduce a
+    '''
+    
+    bibtex_citation = '''
+@article{hirata2006aperture,
+  title={Aperture filters: theory, application, and multiresolution analysis},
+  author={Hirata Jr, Roberto and Brun, Marcel and Barrera, Junior and Dougherty, Edward R},
+  journal={Advances in Nonlinear Signal and Image Processing},
+  pages={15--45},
+  year={2006}
+}
+    '''
+    
+    def __init__(self, window=None, k=1, center=None, mul=1.0, **kw):
+        RAWFeatureExtractor.__init__(self, window, mul, **kw)
+        self.k = k
+        if window is not None:
+            self.set_center()
+
+    def set_center(self):
+        ci = self.window.shape[0] // 2
+        cj = self.window.shape[1] // 2
+
+        if self.window[ci, cj] == 0:
+            raise Exception('Center point must be in the window')
+        self.center = np.sum(self.window[:ci]) + np.sum(self.window[ci,:cj])
+
+
+    def extract(self,  img,  i,  j, pat):
+        pattern = pat
+
+
+        RAWFeatureExtractor.extract(self, img, i, j, pattern)
+        center = pattern[self.center]
+        for l in range(pattern.shape[0]):
+            if pattern[l] >= center:
+                p = pattern[l] - center
+                pattern[l] = self.k + min(self.k, p)
+            else:
+                p = center - pattern[l]
+                pattern[l] = self.k - min(self.k, p)
+
+    def write_state(self, obj_dict):
+        RAWFeatureExtractor.write_state(self, obj_dict)
+        obj_dict['k'] = self.k
+
+    def set_state(self, obj_dict):
+        RAWFeatureExtractor.set_state(self, obj_dict)
+        self.k = int(obj_dict['k'])
+        self.set_center()

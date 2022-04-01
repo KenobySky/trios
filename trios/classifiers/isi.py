@@ -21,7 +21,7 @@ class ISI(Classifier):
 @inproceedings{hirata2007basis,
   title={Basis computation algorithms},
   author={Hirata, Nina ST and Hirata Jr, Roberto and Barrera, Junior},
-  booktitle={Mathematical Morphhology and its Applications to Signal and Image Processing (Proceedings of the 8th International Symposium on Mathematical Morphology)},
+  booktitle={Mathematical Morphology and its Applications to Signal and Image Processing (Proceedings of the 8th International Symposium on Mathematical Morphology)},
   pages={15--26},
   year={2007}
 }

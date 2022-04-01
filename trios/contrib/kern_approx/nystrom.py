@@ -1,16 +1,7 @@
-
-
-
-
-from trios.feature_extractors import RAWFeatureExtractor
 from trios.feature_extractors.base_extractor import FeatureExtractor
 from sklearn.metrics.pairwise import rbf_kernel
-
 from numpy.linalg import eigh
 import numpy as np
-import numpy.random
-
-
 import numba as nb
 from numba import float64
 
@@ -114,6 +105,7 @@ class NystromFeatures(FeatureExtractor):
     def extract(self, img, i, j, pat):
         self.fext.extract(img, i, j, self.fext_pat)
         self.scaled = (self.fext_pat - self.mean)/self.std
+
         # compute kernel between self.fext_pat and Xtr
         if self.kernel == 'poly':
             K_y = fast_poly_kernel(self.basis, self.scaled.reshape(1, -1), degree=self.degree).astype(self.dtype)
@@ -125,8 +117,7 @@ class NystromFeatures(FeatureExtractor):
 
     def extract_batch(self, inp, idx_i, idx_j, batch_X):
         if self.cached_rawbatch is None or self.cached_rawbatch.shape[0] < batch_X.shape[0]:
-            self.cached_rawbatch = np.zeros((batch_X.shape[0], len(self.fext)),
-                self.fext.dtype)
+            self.cached_rawbatch = np.zeros((batch_X.shape[0], len(self.fext)),self.fext.dtype)
             rawbatch = self.cached_rawbatch
         else:
             rawbatch = self.cached_rawbatch[:idx_i.shape[0]]
