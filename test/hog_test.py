@@ -1,10 +1,10 @@
-from trios.classifiers import SKClassifier
-
+import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from trios.contrib.features.hog import HoGExtractor
+
 import trios
-import numpy as np
 import trios.shortcuts.persistence as p
+from trios.classifiers import SKClassifier
 
 if __name__ == '__main__':
     images = trios.Imageset.read('images/training.set')

@@ -1,16 +1,9 @@
 import cv2
-
-import trios.shortcuts.persistence as p
-
 import numpy as np
 
-import scipy as sp
-import scipy.ndimage
-
+import trios.shortcuts.persistence as p
 from trios.serializable import Serializable
 from trios.wop_matrix_ops import process_image, process_image_ordered
-
-import sys
 
 
 class FeatureExtractor(Serializable):

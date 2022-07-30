@@ -2,7 +2,9 @@
 
 
 import unittest
+
 import trios
+
 
 class ImagesetTest(unittest.TestCase):
     def test_creation_empty(self):

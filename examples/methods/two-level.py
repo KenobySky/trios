@@ -1,11 +1,10 @@
-from trios.classifiers import SKClassifier
-from sklearn.tree import DecisionTreeClassifier
-from trios.feature_extractors import RAWFeatureExtractor, CombinationPattern
-import trios
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
-import trios.shortcuts.persistence as p
+import trios
 import trios.shortcuts.window as w
+from trios.classifiers import SKClassifier
+from trios.feature_extractors import RAWFeatureExtractor, CombinationPattern
 
 if __name__ == '__main__':
     np.random.seed(10) # set this to select the same window everytime

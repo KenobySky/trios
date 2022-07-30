@@ -1,13 +1,10 @@
 
 import numpy as np
-
 import skimage.morphology as sk
 
-
 from trios.feature_extractors.base_extractor import FeatureExtractor
-from trios.serializable import Serializable
-
 from trios.feature_extractors.raw import RAWFeatureExtractor
+
 
 class LBPExtractor(RAWFeatureExtractor):
 

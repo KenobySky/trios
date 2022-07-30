@@ -1,6 +1,6 @@
-from trios.feature_extractors.raw import RAWFeatureExtractor
-
 import numpy as np
+
+from trios.feature_extractors.raw import RAWFeatureExtractor
 
 
 class Aperture(RAWFeatureExtractor):

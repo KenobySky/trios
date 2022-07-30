@@ -1,10 +1,9 @@
-from trios.classifiers import SKClassifier
-from sklearn.tree import DecisionTreeClassifier
-from trios.contrib.features.fourier import FourierExtractor
-import trios
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
-import trios.shortcuts.persistence as p
+import trios
+from trios.classifiers import SKClassifier
+from trios.contrib.features.fourier import FourierExtractor
 
 drive_location = 'datasets/drive'
 training = trios.Imageset([

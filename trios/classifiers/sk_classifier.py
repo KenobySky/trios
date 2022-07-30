@@ -6,11 +6,13 @@ Created on Fri May 15 12:22:04 2015
 """
 
 
-import numpy as np
-from .base_classifier import Classifier
-from trios import util
-
 import inspect
+
+import numpy as np
+
+from trios import util
+from .base_classifier import Classifier
+
 
 class SKClassifier(Classifier):
     '''

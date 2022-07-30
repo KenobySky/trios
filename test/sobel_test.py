@@ -2,7 +2,6 @@ import pyximport
 pyximport.install()
 
 from trios.classifiers import SKClassifier
-from sklearn.tree import DecisionTreeClassifier
 from sklearn import svm
 from trios.contrib.features.sobel import SobelExtractor
 import trios

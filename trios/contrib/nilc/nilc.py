@@ -12,13 +12,14 @@ bibtex_citation = '''@inproceedings{montagner2016nilc,
   organization={IEEE}
 }'''
 
-import numpy as np
-from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
-from trios.classifiers import LinearClassifier
 import collections
 import logging
 
+import numpy as np
+from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
+
 from trios import WOperator
+from trios.classifiers import LinearClassifier
 from trios.feature_extractors import CombinationPattern
 
 logger = logging.getLogger('trios.contrib.nilc')

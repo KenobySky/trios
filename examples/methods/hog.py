@@ -1,10 +1,9 @@
-from trios.classifiers import SKClassifier
+import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from trios.contrib.features.hog import HoGExtractor
-import trios
-import numpy as np
 
-import trios.shortcuts.persistence as p
+import trios
+from trios.classifiers import SKClassifier
 
 drive_location = 'datasets/drive'
 training = trios.Imageset([

@@ -1,10 +1,10 @@
-from trios.contrib.kern_approx import NystromFeatures
-from trios.classifiers import SKClassifier
-from trios.feature_extractors import RAWFeatureExtractor
-import trios
 import numpy as np
-
 from sklearn.svm import LinearSVC
+
+import trios
+from trios.classifiers import SKClassifier
+from trios.contrib.kern_approx import NystromFeatures
+from trios.feature_extractors import RAWFeatureExtractor
 
 if __name__ == '__main__':
     np.random.seed(10) 

@@ -1,11 +1,11 @@
-import trios
-from trios.contrib.nilc.nilc import nilc_precomputed, plot_progress
-import trios.shortcuts.window as w
+# Activate logging so that we can follow NILC progress
+import logging
 
 import numpy as np
 
-# Activate logging so that we can follow NILC progress
-import logging
+import trios
+from trios.contrib.nilc.nilc import nilc_precomputed, plot_progress
+
 logging.basicConfig(level=logging.INFO)
 
 from nilc1 import operator_with_random_window

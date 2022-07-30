@@ -2,10 +2,12 @@
 Contains Imageset related functions.
 """
 
-import os.path
-import numpy as np
-import trios.shortcuts.persistence as p
 import collections
+import os.path
+
+import numpy as np
+
+import trios.shortcuts.persistence as p
 
 ImagePair = collections.namedtuple('ImagePair', ['input', 'output', 'mask'])
 

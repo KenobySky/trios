@@ -1,7 +1,7 @@
-from ._legacy import lib as v1
-from ._legacy import ffi
-
 import numpy as np
+
+from ._legacy import lib as v1
+
 
 #from trios.WOperator import WOperator
 #from trios.feature_extractors import RAWBitFeatureExtractor, CombinationPattern

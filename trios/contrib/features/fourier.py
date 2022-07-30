@@ -2,7 +2,6 @@ import numpy as np
 import numpy.fft as fft
 
 from trios.feature_extractors.base_extractor import FeatureExtractor
-from trios.serializable import Serializable
 
 
 class FourierExtractor(FeatureExtractor):

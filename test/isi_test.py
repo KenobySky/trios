@@ -1,9 +1,9 @@
-from trios.classifiers.isi import ISI
-from trios.feature_extractors import RAWBitFeatureExtractor
-import trios
 import numpy as np
 
+import trios
 import trios.shortcuts.persistence as p
+from trios.classifiers.isi import ISI
+from trios.feature_extractors import RAWBitFeatureExtractor
 
 if __name__ == '__main__':
     images = trios.Imageset.read('images/level1.set')

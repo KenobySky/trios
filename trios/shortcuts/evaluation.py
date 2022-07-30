@@ -6,20 +6,17 @@ Created on Fri Dec 11 10:11:40 2015
 """
 from __future__ import print_function
 
-import cv2
-
-import trios
-import numpy as np
-import scipy as sp
-import scipy.ndimage
 import os
 import os.path
+import sys
 
+import cv2
+import numpy as np
+
+import trios
+import trios.shortcuts.persistence as p
 from trios.wop_matrix_ops import compare_images, compare_images_binary
 
-import trios.shortcuts.persistence as p
-
-import sys
 
 def apply_batch(operator, testset, folder_prefix, procs=None):
     '''

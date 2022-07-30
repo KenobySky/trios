@@ -1,6 +1,6 @@
 import trios
-import trios.shortcuts.persistence as p
 import trios.shortcuts.evaluation as ev
+import trios.shortcuts.persistence as p
 
 trios.show_eval_progress = False
 

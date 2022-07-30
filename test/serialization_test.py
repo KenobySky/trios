@@ -1,14 +1,12 @@
-import trios
-from trios.feature_extractors import RAWFeatureExtractor, RAWBitFeatureExtractor
-from trios.classifiers import SKClassifier
-
-import sklearn
-from sklearn.tree import DecisionTreeClassifier
+import gzip
+import tempfile
 
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
-import tempfile
-import gzip
+import trios
+from trios.classifiers import SKClassifier
+from trios.feature_extractors import RAWFeatureExtractor, RAWBitFeatureExtractor
 
 try:
     import cPickle as pickle

@@ -1,7 +1,6 @@
-from trios.serializable import Serializable
-
 import numpy as np
 
+from trios.serializable import Serializable
 
 
 class Classifier(Serializable):

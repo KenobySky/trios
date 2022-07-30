@@ -1,17 +1,17 @@
-from trios.classifiers import SKClassifier
-from sklearn.tree import DecisionTreeClassifier
-from trios.feature_extractors import RAWFeatureExtractor
-import trios
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
+import trios
 import trios.shortcuts.persistence as p
+from trios.classifiers import SKClassifier
+from trios.feature_extractors import RAWFeatureExtractor
 
 trios.show_eval_progress=False
 
 if __name__ == '__main__':
     np.random.seed(10)
     images = trios.Imageset.read('../images/level1.set')
-    win = np.ones((5, 5), np.uint8)
+    win = np.ones((3, 3), np.uint8)
     
     # use Decision Tree Classifier and raw pixels as features.
     op = trios.WOperator(win, SKClassifier(DecisionTreeClassifier()), RAWFeatureExtractor)
@@ -25,6 +25,7 @@ if __name__ == '__main__':
     
     # load image and apply operator. Second argument is application mask.
     img= p.load_image('../images/jung-1a.png')
+
     print('Applying to image jung-1a.png')
     out = op.apply(img, img)
     print("Saving as out-dt-jung-1a.png")

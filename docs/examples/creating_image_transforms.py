@@ -1,11 +1,10 @@
-from trios.classifiers import SKClassifier
 from sklearn.tree import DecisionTreeClassifier
-from trios.feature_extractors import RAWFeatureExtractor
-import trios
-import numpy as np
 
+import trios
 import trios.shortcuts.persistence as p
 import trios.shortcuts.window as trios_win
+from trios.classifiers import SKClassifier
+from trios.feature_extractors import RAWFeatureExtractor
 
 if __name__ == '__main__':
     training_set = trios.Imageset.read('jung-images/training.set')

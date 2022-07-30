@@ -1,6 +1,7 @@
-import os
-import download_test_images
 import gc
+import os
+
+import download_test_images
 
 if __name__ == '__main__':
     download_test_images.download_images()

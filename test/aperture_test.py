@@ -1,10 +1,10 @@
-from trios.classifiers import SKClassifier
-from sklearn.tree import DecisionTreeClassifier
-from trios.feature_extractors import Aperture
-import trios
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
+import trios
 import trios.shortcuts.persistence as p
+from trios.classifiers import SKClassifier
+from trios.feature_extractors import Aperture
 
 if __name__ == '__main__':
     images = trios.Imageset([('images_gl/einstein-noise.png', 'images_gl/einstein-original.png', None)])

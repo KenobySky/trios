@@ -1,13 +1,11 @@
-from trios.classifiers import SKClassifier
+import numpy as np
 from sklearn import svm
-from sklearn.tree import DecisionTreeClassifier
-from trios.contrib.features.lbp import LBPExtractor
-from trios.contrib.features.featurecombination import FeatureCombinationExtractor
-from trios.feature_extractors import RAWFeatureExtractor
 
 import trios
-import numpy as np
-import trios.shortcuts.persistence as p
+from trios.classifiers import SKClassifier
+from trios.contrib.features.featurecombination import FeatureCombinationExtractor
+from trios.contrib.features.lbp import LBPExtractor
+from trios.feature_extractors import RAWFeatureExtractor
 
 if __name__ == '__main__':
     images = trios.Imageset.read('../images/training.set')

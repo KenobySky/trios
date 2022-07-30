@@ -25,9 +25,6 @@ class RAWFeatureExtractor(FeatureExtractor):
 
         k = 0
 
-        #print(type(pattern.shape))
-        #print(pattern.shape)
-
         for l in range(-hh2, hh2+1):
             for m in range(-ww2, ww2+1):
                 if win[l+hh2, m+ww2] != 0:
@@ -38,7 +35,7 @@ class RAWFeatureExtractor(FeatureExtractor):
                     k += 1
         if self.mul != 1:
             for l in range(pattern.shape[0]):
-                pattern[l] = (pattern[l] *self. mul)
+                pattern[l] = (pattern[l] *self.mul)
 
     def write_state(self, obj_dict):
         FeatureExtractor.write_state(self, obj_dict)

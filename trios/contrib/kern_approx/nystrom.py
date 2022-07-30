@@ -1,9 +1,11 @@
-from trios.feature_extractors.base_extractor import FeatureExtractor
-from sklearn.metrics.pairwise import rbf_kernel
-from numpy.linalg import eigh
-import numpy as np
 import numba as nb
+import numpy as np
 from numba import float64
+from numpy.linalg import eigh
+from sklearn.metrics.pairwise import rbf_kernel
+
+from trios.feature_extractors.base_extractor import FeatureExtractor
+
 
 @nb.vectorize([float64(float64, float64, float64)], nopython=True, target='parallel')
 def power_elementwise (mat, Xshape1, degree):

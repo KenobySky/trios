@@ -4,31 +4,22 @@ Created on Wed Mar 25 14:40:19 2015
 
 @author: igordsm
 """
-from __future__ import print_function
 from __future__ import division
+from __future__ import print_function
+
+import inspect
+import itertools
+import logging
+import multiprocessing
+import sys
 
 import cv2
-
-from trios.wop_matrix_ops import apply_loop, compare_images, compare_images_binary
-
-from trios.serializable import Serializable
+import numpy as np
 
 import trios
 import trios.shortcuts.persistence as p
-
-import numpy as np
-import scipy as sp
-import scipy.ndimage
-
-import inspect
-import sys
-
-
-import multiprocessing
-
-import itertools
-
-import logging
+from trios.serializable import Serializable
+from trios.wop_matrix_ops import apply_loop, compare_images, compare_images_binary
 
 logger = logging.getLogger('trios.woperator')
 

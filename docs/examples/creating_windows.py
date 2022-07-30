@@ -1,4 +1,5 @@
 import numpy as np
+
 import trios.shortcuts.window as trios_win
 
 if __name__ == '__main__': 

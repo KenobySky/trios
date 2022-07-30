@@ -1,15 +1,15 @@
-import trios
-from sklearn.tree import DecisionTreeClassifier
-from trios.classifiers import SKClassifier
-from trios.feature_extractors import RAWFeatureExtractor
-
-from trios.contrib.nilc.nilc import nilc, plot_progress
-import trios.shortcuts.window as w
-
-import numpy as np
-
 # Activate logging so that we can follow NILC progress
 import logging
+
+import numpy as np
+from sklearn.tree import DecisionTreeClassifier
+
+import trios
+import trios.shortcuts.window as w
+from trios.classifiers import SKClassifier
+from trios.contrib.nilc.nilc import nilc, plot_progress
+from trios.feature_extractors import RAWFeatureExtractor
+
 logging.basicConfig(level=logging.INFO)
 
 def operator_with_random_window(training_set, domain_window):

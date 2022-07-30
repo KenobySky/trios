@@ -1,15 +1,14 @@
-import numpy as np
-import trios.woperator
-from trios.feature_extractors.base_extractor import FeatureExtractor
-import math
-
-import multiprocessing as mp
-from multiprocessing import sharedctypes
 import ctypes
 import itertools
+import math
+import multiprocessing as mp
+from multiprocessing import sharedctypes
+
+import numpy as np
 
 import trios
-
+import trios.woperator
+from trios.feature_extractors.base_extractor import FeatureExtractor
 
 
 def extract_pattern(combinationPattern, img, i, j, pat):

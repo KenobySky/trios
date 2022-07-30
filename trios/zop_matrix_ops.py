@@ -31,6 +31,7 @@ def count_pixels_mask(msk, win):
 def process_image(dataset, win, iinput,  output, mask, extractor):
     h = iinput.shape[0]
     w = iinput.shape[1]
+    z = iinput.shape[2]
     
     i=0
     j=0
@@ -38,6 +39,7 @@ def process_image(dataset, win, iinput,  output, mask, extractor):
     m=0
     hh = win.shape[0]
     ww = win.shape[1]
+    zz = win.shape[2]
     hh2 = hh/2
     ww2 = ww/2
     count = 0
@@ -86,6 +88,7 @@ def process_image_ordered(imageset, extractor):
     
     hh = win.shape[0]
     ww = win.shape[1]
+    zz = win.shape[2]
     hh2 = hh//2
     ww2 = ww//2
         
@@ -103,10 +106,10 @@ def process_image_ordered(imageset, extractor):
                     npixels += 1
                     
     temp = extractor.temp_feature_vector()
-    X = np.zeros((npixels, len(extractor)), temp.dtype)
+    X = np.zeros((npixels, len(extractor),zz), temp.dtype)
     y = np.zeros(npixels, np.uint8)
     k = 0
-    for (inp, out, msk) in p.load_imageset(imageset, win):
+    for (inp, out, msk) in p.load_imageset(imageset, win,isGrayScale=False):
         msk_np = np.asarray(msk, dtype=np.uint8)
         out_np = np.asarray(out, dtype=np.uint8)
         idx_i, idx_j = np.nonzero(msk_np)

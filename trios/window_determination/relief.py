@@ -4,15 +4,12 @@
 import numpy as np
 cimport numpy as np
 
-from cython.parallel import prange
-
 cimport cython
 
 cdef extern from "stdlib.h":
     int c_libc_rand "rand"()
     int c_libc_srand "srand"(int q)
 
-from trios import util
 from collections import OrderedDict
     
 @cython.boundscheck(False)

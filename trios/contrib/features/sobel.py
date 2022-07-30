@@ -4,6 +4,7 @@ from skimage import filters
 
 from trios.feature_extractors.raw import RAWFeatureExtractor
 
+
 class SobelExtractor(RAWFeatureExtractor):
 
     def extract_batch(self,  inp, idx_i, idx_j, X):

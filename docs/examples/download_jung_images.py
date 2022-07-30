@@ -5,10 +5,10 @@ Created on Tue Oct 27 15:50:50 2015
 @author: igordsm
 """
 
-import urllib.request
-import tarfile
-
 import os
+import tarfile
+import urllib.request
+
 
 def check_downloaded():
     return os.path.isdir('images') and os.path.exists('images/jung-1a.png')
