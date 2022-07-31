@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='TriosLibPython',
-    version='2.2.1',
+    version='2.2.2',
     packages=['trios', 'trios.legacy', 'trios.contrib', 'trios.contrib.nilc', 'trios.contrib.staffs',
               'trios.contrib.features', 'trios.contrib.kern_approx', 'trios.shortcuts', 'trios.classifiers',
               'trios.feature_extractors', 'trios.window_determination'],

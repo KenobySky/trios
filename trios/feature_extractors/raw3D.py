@@ -27,17 +27,21 @@ class RAWFeatureExtractorRGB(FeatureExtractor):
 
         k = 0
 
-        for l in range(-hh2, hh2 + 1):
-            for m in range(-ww2, ww2 + 1):
-                if np.all(win[l + hh2, m + ww2, :] != 0):
-                    aux = img[i + l, j + m, :]
+        for L in range(-hh2, hh2 + 1):
+            for M in range(-ww2, ww2 + 1):
+                r = img[i + L, j + M, 0]
+                g = img[i + L, j + M, 1]
+                b = img[i + L, j + M, 2]
 
-                    pattern[k, :] = aux[:]
+                if (r != 0 and g != 0 and b != 0):
+                    pattern[k, 0] = r
+                    pattern[k, 1] = g
+                    pattern[k, 2] = b
 
                     k += 1
         if self.mul != 1:
-            for l in range(pattern.shape[0]):
-                pattern[l, :] = (pattern[l, :] * self.mul)
+            for L in range(pattern.shape[0]):
+                pattern[L, :] = (pattern[L, :] * self.mul)
 
     def write_state(self, obj_dict):
         FeatureExtractor.write_state(self, obj_dict)
