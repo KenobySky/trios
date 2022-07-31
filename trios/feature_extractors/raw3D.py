@@ -33,7 +33,7 @@ class RAWFeatureExtractorRGB(FeatureExtractor):
                 g = img[i + L, j + M, 1]
                 b = img[i + L, j + M, 2]
 
-                if (r != 0 and g != 0 and b != 0):
+                if r != 0 and g != 0 and b != 0:
                     pattern[k, 0] = r
                     pattern[k, 1] = g
                     pattern[k, 2] = b

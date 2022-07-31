@@ -22,7 +22,7 @@ def extractor(window, imageset_path, extractor, to_float32=True):
 
 
 def main():
-    window = np.ones(shape=(31, 31, 3), dtype=np.uint8)
+    window = np.ones(shape=(3, 3, 3), dtype=np.uint8)
 
     x,y = extractor(window=window, imageset_path="A:/MeusProjetosPython/KerasVesselSegmentation/DRIVE_input/smallset.set", extractor=RAWFeatureExtractorRGB, to_float32=False)
 
@@ -31,7 +31,7 @@ def main():
     print(getsizeMB(x))
     print(getsizeMB(y))
 
-    k = x[1000].reshape((31,31,3))
+    k = x[1000].reshape((3,3,3))
     plt.imshow(k)
     plt.show()
 
